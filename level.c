@@ -8,6 +8,9 @@
 */
 
 /* Use the newer ALSA API */
+
+
+// TODO: Frequency weighing
 #define ALSA_PCM_NEW_HW_PARAMS_API
 
 #include <alsa/asoundlib.h>
@@ -84,7 +87,7 @@ int main() {
 	/* We want to loop for 5 seconds */
 	snd_pcm_hw_params_get_period_time(params,
 			&val, &dir);
-	loops = 50e6 / val; //run for 50 seconds
+	loops = 120e6 / val; //run for 50 seconds
 
 	printf("period time: %d us\n", val); //length of a period in microseconds
 	printf("period frames: %d\n", frames); //frames per period
@@ -160,16 +163,16 @@ int main() {
 		printf("%d\t%d\t%d\n", mov_sum, red, green);
 
 			
-			for ( i = 0; i < 10; i++)
+			for ( i = 0; i < 11; i++)
 
 			{
 				if (mov_sum > 1e5)
-					dotstar_set_led(led_array, i, 0,green,red,2);
+					dotstar_set_led(led_array, i, 0,green,red,5);
 				else
 
-					dotstar_set_led(led_array, i, 0,green,red, 2);
+					dotstar_set_led(led_array, i, 0,green,red, 5);
 			}
-			dotstar_refresh(led_array, 2);
+			dotstar_refresh(led_array, 11);
 		
 
 
